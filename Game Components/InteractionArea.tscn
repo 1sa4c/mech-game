@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://yy7wi5gnjmq7"]
+
+[ext_resource type="Script" path="res://Game Components/InteractionArea.gd" id="1_xu1je"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_eq4vc"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_830am"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sswee"]
+albedo_color = Color(1, 0.619608, 0.247059, 1)
+
+[node name="InteractionArea" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_xu1je")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.005, 0, 0, 0, 2.005, 0, 0, 0, 2.005, 0, 0, 0)
+shape = SubResource("CylinderShape3D_eq4vc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_830am")
+surface_material_override/0 = SubResource("StandardMaterial3D_sswee")

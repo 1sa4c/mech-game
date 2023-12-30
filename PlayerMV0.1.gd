@@ -14,6 +14,18 @@ var movement = Vector3()
 		
 func _physics_process(delta):
 	#get keyboard input
+
+@onready var interaction_storage = []
+@onready var int_visual = $"Interaction comps/Label3D"
+
+func _ready():
+	update_interactions()
+	
+
+func _physics_process(delta):
+	
+	if Input.is_action_just_pressed("Interact"):
+		execute_interaction()
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
@@ -36,5 +48,14 @@ func _physics_process(delta):
 	movement = velocity + gravity_vec
 	floor_snap_length = len(snap); 
 	move_and_slide()
+<<<<<<< Updated upstream
 	
 	
+=======
+
+
+
+
+	
+	
+>>>>>>> Stashed changes
