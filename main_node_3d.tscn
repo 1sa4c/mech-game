@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5jfsgi3a8nm7"]
+[gd_scene load_steps=13 format=3 uid="uid://c5jfsgi3a8nm7"]
 
 [ext_resource type="Script" path="res://PlayerMV0.1.gd" id="1_3y4hl"]
 [ext_resource type="PackedScene" uid="uid://qhgtq3nfoxo1" path="res://Game Components/interaction_area.tscn" id="2_2uugx"]
@@ -8,6 +8,11 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e56ij"]
 albedo_color = Color(1, 0.34902, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2wxbp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhfke"]
+albedo_color = Color(0.356863, 0.415686, 0.454902, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kvxw"]
 
@@ -32,12 +37,14 @@ disable_mode = 2
 script = ExtResource("1_3y4hl")
 metadata/_edit_group_ = true
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 5, 4)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 mesh = SubResource("CapsuleMesh_gwcmq")
 surface_material_override/0 = SubResource("StandardMaterial3D_e56ij")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/MeshInstance3D"]
+transform = Transform3D(-2.62268e-08, -0.195, 0, 0.6, -8.52372e-09, 0, 0, 0, 0.385, 0, 0.633935, -0.349578)
+mesh = SubResource("BoxMesh_2wxbp")
+surface_material_override/0 = SubResource("StandardMaterial3D_qhfke")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_4kvxw")
@@ -55,6 +62,12 @@ shape = SubResource("CylinderShape3D_pvjdb")
 [node name="InteracionLabel" type="Label3D" parent="CharacterBody3D/InteractionComps"]
 transform = Transform3D(1, 0, 0, 0, 0.575505, 0.817798, 0, -0.817798, 0.575505, 0, 4.05232, 2.5271)
 text = "Teste"
+
+[node name="CamMount" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4022, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CamMount"]
+transform = Transform3D(1, 0, 0, 0, 0.660133, 0.751149, 0, -0.751149, 0.660133, 0, -0.125679, 3.57624)
 
 [node name="InteractionArea" parent="." instance=ExtResource("2_2uugx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62537, 0.882082, -8.44354)
