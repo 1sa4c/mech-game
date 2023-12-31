@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5jfsgi3a8nm7"]
+[gd_scene load_steps=12 format=3 uid="uid://c5jfsgi3a8nm7"]
 
 [ext_resource type="Script" path="res://PlayerMV0.1.gd" id="1_3y4hl"]
 [ext_resource type="PackedScene" uid="uid://qhgtq3nfoxo1" path="res://Game Components/interaction_area.tscn" id="2_2uugx"]
 [ext_resource type="MeshLibrary" uid="uid://dr7bma8eecl8w" path="res://meshlibrary.meshlib" id="2_tlogv"]
+[ext_resource type="PackedScene" uid="uid://umopr4fi0k0d" path="res://mob.tscn" id="4_c8jct"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gwcmq"]
 
@@ -26,33 +27,33 @@ material = SubResource("StandardMaterial3D_jgwid")
 
 [node name="BSC" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 disable_mode = 2
 script = ExtResource("1_3y4hl")
 metadata/_edit_group_ = true
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+[node name="Camera3D" type="Camera3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 8, 5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="player"]
 mesh = SubResource("CapsuleMesh_gwcmq")
 surface_material_override/0 = SubResource("StandardMaterial3D_e56ij")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
 shape = SubResource("CapsuleShape3D_4kvxw")
 
-[node name="InteractionComps" type="Node3D" parent="CharacterBody3D"]
+[node name="InteractionComps" type="Node3D" parent="player"]
 
-[node name="InteractionArea" type="Area3D" parent="CharacterBody3D/InteractionComps"]
+[node name="InteractionArea" type="Area3D" parent="player/InteractionComps"]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/InteractionComps/InteractionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player/InteractionComps/InteractionArea"]
 shape = SubResource("CylinderShape3D_pvjdb")
 
-[node name="InteracionLabel" type="Label3D" parent="CharacterBody3D/InteractionComps"]
+[node name="InteracionLabel" type="Label3D" parent="player/InteractionComps"]
 transform = Transform3D(1, 0, 0, 0, 0.575505, 0.817798, 0, -0.817798, 0.575505, 0, 4.05232, 2.5271)
 text = "Teste"
 
@@ -88,5 +89,8 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
-[connection signal="area_entered" from="CharacterBody3D/InteractionComps/InteractionArea" to="CharacterBody3D" method="_on_interaction_area_area_entered"]
-[connection signal="area_exited" from="CharacterBody3D/InteractionComps/InteractionArea" to="CharacterBody3D" method="_on_interaction_area_area_exited"]
+[node name="mob" parent="." instance=ExtResource("4_c8jct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.30228, 1.37555, 2.46294)
+
+[connection signal="area_entered" from="player/InteractionComps/InteractionArea" to="player" method="_on_interaction_area_area_entered"]
+[connection signal="area_exited" from="player/InteractionComps/InteractionArea" to="player" method="_on_interaction_area_area_exited"]
