@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var speed = 2;
+var speed = 4;
 var player_chase = false;
 @onready var player = get_node("/root/BSC/player")
 
